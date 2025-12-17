@@ -162,8 +162,55 @@ header button i:active{
     cursor: pointer;
 }
 
+#cart-items {
+  flex: 1;              
+  overflow-y: auto;     
+  padding: 1rem;
+  max-height: calc(100vh - 150px);
+}
+
+#cart-items::-webkit-scrollbar {
+  width: 6px;
+}
+
+#cart-items::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 3px;
+}
+
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.checkout-btn{
+    font-size: 1.5rem;
+    background-color: #1b6c9b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 16px;
+}
+
+.checkout-btn:hover{
+    background-color: #145174;
+}
+
+.checkout-btn:active{
+    background-color: #2e70bb;
+}
+
 .cart-footer{
-    margin-top: auto ;
+    border-top: 1px solid #ddd;
+    padding: 1rem;
+}
+
+.cart-footer p{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .plus{
@@ -312,7 +359,7 @@ header button i:active{
 
 .product-card img{
     width: 100%;
-    height: 300px;
+    height: 250px;
     border-radius: 16px;
 }
 
@@ -325,6 +372,11 @@ header button i:active{
     cursor: pointer;
 }
 
+.add-to-cart-btn::before, .add-to-cart-btn::after{
+    content: none;
+    
+}
+
 .featured button{
     background-color: var(--accent);
 }
@@ -332,6 +384,13 @@ header button i:active{
 .featured button:hover{
     background-color: #a77e25;
 }
+
+.product-card.featured:hover {
+  box-shadow: 0 10px 30px rgba(218,165,32,0.4);
+}
+
+
+
 
 .featured button:active{
     background-color: #d3a032;
