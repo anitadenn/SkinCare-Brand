@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermaCure | Skin Care</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f060a193f6.js" crossorigin="anonymous"> </script>
+</head>
+<body>
+    <header>
+        <div class="logo"> <a href="index.html">DermaCure</a></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <button><i class="fa-solid fa-cart-shopping" aria-hidden="true" id="cartBtn"></i></button>
+    </header>
+
+    <section class="hero">
+
+        <div class="hero-text">
+            <h1>clinically refined skincare for clear, resilient skin</h1>
+            <br>
+            <p class="muted">The biggest skincare brand in all of Africa, we have been tested by top derms in the world and we sell out 10k+ products a day</p>
+            <br>
+            <button class="cta"><a href="products.html">See Our Products</a></button>
+        </div>
+
+        <div class="hero-image">
+            <img src="images/banner1.png" alt="An image of an asian girl">
+        </div>
+
+    </section>
+
+
+    
+    <div id="cart-overlay"></div>
+    <aside id="cart-panel">
+        <button id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        <h2>Your Cart</h2>
+
+        <div id="cart-items">
+
+        </div>
+
+        <div class="cart-footer">
+            <p>Total: <span id="cart-total">$0</span></p>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </aside>
+
+
+
+    <section class="proof">
+        <h2>Our products are:</h2>
+
+        <div class="proof-container">
+            <div class="proof-card">
+                <div class="proof-icon"><i class="fa-solid fa-flask-vial"></i></div>
+                <h3>Dermatologist tested</h3>
+                <p>Our Products have been tested by the top dermatologist in the world</p>
+            </div>
+
+            <div class="proof-card">
+                <div class="proof-icon">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <h3>Vegan and Cruelty Free</h3>
+                <p>Our products are vegan and they are acquired by no means of cruelty to any species</p>
+            </div>
+
+            <div class="proof-card">
+                <div class="proof-icon">
+                    <i class="fa-solid fa-people-group"></i>
+                </div>
+                <h3>5million+ Happy Customers</h3>
+                <p>Our products have kept and satisfied over 5.2 million people in Africa and worldwide</p>
+            </div>
+
+            <div class="proof-card">
+                <div class="proof-icon">
+                    <i class="fa-solid fa-house-medical-circle-check"></i>
+                </div>
+                <h3>WHO Approved</h3>
+                <p>Our products have been approved by the world health organization</p>
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="best-sellers">
+        <p class="best-product-intro">Best Sellers</p>
+
+        <div class="product-container">
+
+            <div class="product-card featured">
+
+                <img src="images/sc7.jpeg" alt="Hyluronic acid">
+
+                <div class="product-card-info">
+                    <p class="product-name">Hyluronic acid</p>
+                    <p class="product-desc">Anti-aging agent</p>
+                    <p class="product-price">N400,000</p>
+                    <button class="add-to-cart-btn" onclick="addToCart({id: 1, name: 'Glow Cleanser', price:8500})">Add to Cart <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <div class="product-card featured">
+
+                <img src="images/sc9.jpeg" alt="Hyluronic acid">
+
+                <div class="product-card-info">
+                    <p class="product-name">Hyluronic acid</p>
+                    <p class="product-desc">Anti-aging agent</p>
+                    <p class="product-price">N400,000</p>
+                    <button class="add-to-cart-btn" onclick="addToCart({id: 2, name: 'Hydra Serum', price:8500})">Add to Cart <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <div class="product-card featured">
+
+                <img src="images/sc10.jpeg" alt="Hyluronic acid">
+
+                <div class="product-card-info">
+                    <p class="product-name">Hyluronic acid</p>
+                    <p class="product-desc">Anti-aging agent</p>
+                    <p class="product-price">N400,000</p>
+                    <button class="add-to-cart-btn" onclick="addToCart({id: 3, name: 'Daily Moisturizer', price:8500})">Add to Cart <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="why-this-brand">
+        <p>Why this brand?</p>
+        <div class="reasons">
+            <div class="reason-card">
+                <div class="proof-icon"><i class="fa-solid fa-eye-dropper"></i></div>
+                <p>Targets acne without stripping skin</p>
+            </div>
+            <div class="reason-card">
+                <div class="proof-icon"><i class="fa-solid fa-flask"></i></div>
+                <p>Formulated for melanin-rich skin</p>
+            </div>
+            <div class="reason-card">
+                <div class="proof-icon"><i class="fa-solid fa-radiation"></i></div>
+                <p>No harsh actives, no BS ingredients</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <p class="review-text">what People say about us:</p>
+
+        <div class="review-container">
+
+            <div class="review-card">
+                <img src="images/user1.jpeg" alt="Customer">
+                <div>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui est eaque nisi ab commodi! Corrupti aut animi ipsa placeat quaerat harum optio minus, molestiae nihil a beatae vero id. Quo!</p>
+                    <h3>Chisom Nwachukwu</h3>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <img src="images/user2.jpeg" alt="Customer">
+                <div>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui est eaque nisi ab commodi! Corrupti aut animi ipsa placeat quaerat harum optio minus, molestiae nihil a beatae vero id. Quo!</p>
+                    <h3>Kolade Jeremiah</h3>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="banner">
+            <p>Your skin deserves better!</p>
+            <button class="cta">Contact Us</button>
+        </div>  
+    </section>
+
+
+    <footer>
+
+        <div class="newletter-form">
+            <p>Subscribe to our newsletter for weekly skin tips..</p>
+                <form>
+                    <input type="email" placeholder="Enter email" id="newsletter-input" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+        </div>
+
+
+        <div class="footer">
+            <div class="footbrand">
+                <div class="logo">DermaCure</div> 
+                <p>Our brand is your most trusted place to get skincare that suits your skin</p>
+            </div>
+            
+            <div class="footlinks">
+                <ul>
+                    <li><strong>Quick Links</strong></li>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Products</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+
+                <ul>
+                    <li><strong>Socials</strong></li>
+                    <li><a href="">WhatsApp</a></li>
+                    <li><a href="">Instagram</a></li>
+                    <li><a href="">Tiktok</a></li>
+                    <li><a href="">Facebook</a></li>
+                    <li><a href="">Twitter</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+            
+        
+        <p>copyright &copy; 2025 | All rights reserved - <a href="https://linkedin.com/in/anita-dev00">Anita</a></p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

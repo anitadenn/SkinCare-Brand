@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermaCure | Skin Care</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f060a193f6.js" crossorigin="anonymous"> </script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">DermaCure</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <button><i class="fa-solid fa-cart-shopping" aria-hidden="true" id="cartBtn"></i></button>
+    </header>
+
+    <section class="contact-banner">
+        <h1>Contact Us</h1>
+    </section>
+
+     <div id="cart-overlay"></div>
+    <aside id="cart-panel">
+        <button id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        <h2>Your Cart</h2>
+
+        <div id="cart-items">
+
+        </div>
+
+        <div class="cart-footer">
+            <p>Total: <span id="cart-total">$0</span></p>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </aside>
+
+
+
+    <section class="contact-us">
+    <div class="row">
+        <div class="contact-col">
+            <div>
+                    <i class="fa fa-home"></i>
+                <span>
+                    <h5>XYZ Road, ABC Building</h5>
+                    <p>Guzape, Abuja, Nigeria</p>
+                </span>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+            <span>
+                <h5>+234 5678901</h5>
+                <p>Monday to saturday, 10AM to 6PM</p>
+            </span>
+        </div>
+        <div>
+            <i class="fa fa-envelope-o"></i>
+        <span>
+            <h5>info@gmail.com</h5>
+            <p>Email us your query</p>
+        </span>
+    </div>
+    </div>
+        <div class="contact-col">
+            <form action="form_handler.php" method="post">
+                <input type="text" name="name" placeholder="Enter your name" required>
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <input type="text" name="subject" placeholder="Enter your subject" required>
+                <textarea rows="8" name="message" placeholder="Message" required></textarea>
+                <button type="submit" class="contact-submitbtn">Send message</button>
+
+            </form>
+        </div>
+        
+    </div>
+
+
+</section>
+
+<footer>
+
+        <div class="newletter-form">
+            <p>Subscribe to our newsletter for weekly skin tips..</p>
+                <form>
+                    <input type="email" placeholder="Enter email" id="newsletter-input" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+        </div>
+
+
+        <div class="footer">
+            <div class="footbrand">
+                <div class="logo">DermaCure</div> 
+                <p>Our brand is your most trusted place to get skincare that suits your skin</p>
+            </div>
+            
+            <div class="footlinks">
+                <ul>
+                    <li><strong>Quick Links</strong></li>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Products</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+
+                <ul>
+                    <li><strong>Socials</strong></li>
+                    <li><a href="">WhatsApp</a></li>
+                    <li><a href="">Instagram</a></li>
+                    <li><a href="">Tiktok</a></li>
+                    <li><a href="">Facebook</a></li>
+                    <li><a href="">Twitter</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+            
+        
+        <p>copyright &copy; 2025 | All rights reserved - <a href="https://linkedin.com/in/anita-dev00">Anita</a></p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>
+
+
+
+
+
+
