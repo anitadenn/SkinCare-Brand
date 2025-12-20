@@ -296,11 +296,13 @@ function renderHomepageFeatured() {
   });
 }
 
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   renderHomepageFeatured();
 });
-
-
 
 
 
