@@ -6,6 +6,7 @@ const cartBtn = document.getElementById("cartBtn");
 const cartPanel = document.getElementById("cart-panel");
 const cartOverlay = document.getElementById("cart-overlay");
 const closeCart = document.getElementById("close-cart");
+const clearFiltersBtn = document.getElementById("clearFilters");
 
 
 
@@ -36,7 +37,11 @@ cartOverlay.addEventListener("click", closeCartPanel)
 
 
 
-let cart = {};
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
 function addToCart(product){
     if (cart[product.id]){
@@ -45,9 +50,42 @@ function addToCart(product){
     else{
         cart[product.id] = {...product, qty: 1};
     }
+    
+    saveCart();
     renderCart();
+    updateCartCount();
     console.log(cart);
 
+}
+
+function addRemoveListeners() {
+  const removeBtns = document.querySelectorAll(".remove-item");
+
+  removeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      delete cart[id];
+
+      saveCart();
+      renderCart();
+      updateCartCount();
+    });
+  });
+}
+
+
+function updateCartCount() {
+  const cartCount = document.getElementById("cart-count");
+  const totalQty = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
+
+  if (totalQty > 0) {
+    cartCount.textContent = totalQty;
+    cartCount.style.display = "inline-block";
+  } else {
+    cartCount.style.display = "none";
+  }
+
+  document.getElementById("cart-count").textContent = count;
 }
 
 
@@ -72,7 +110,7 @@ function renderCart(){
         row.innerHTML = `<img src="${item.image}" alt="${item.name}">
         <div class="cart-info">
             <p>${item.name}</p>
-            <p>${item.price.toLocaleString()}</p>
+            <p>₦${item.price.toLocaleString()}</p>
             <div class="qty-controls">
                 <button class="minus" data-id="${item.id}">-</button>
                 <span>${item.qty}</span>
@@ -80,13 +118,16 @@ function renderCart(){
             </div>
         </div>
         
-            
+        <button class="remove-item" data-id="${item.id}" aria-label="Remove item">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
         `;
         cartItems.appendChild(row);
     });
     
     cartTotal.textContent = `₦${total.toLocaleString()}`;
     addQtyListeners(); 
+    addRemoveListeners();
 }
 
 
@@ -98,7 +139,10 @@ function addQtyListeners(){
         button.addEventListener("click", () => {
             const id = button.dataset.id;
             cart[id].qty ++;
+
+            saveCart();
             renderCart();
+            updateCartCount();
         });
     });
 
@@ -107,7 +151,10 @@ function addQtyListeners(){
             const id = button.dataset.id;
             cart[id].qty -= 1;
             if(cart[id].qty <= 0) delete cart[id];
+
+            saveCart();
             renderCart();
+            updateCartCount();
         });
     });
 
@@ -115,26 +162,26 @@ function addQtyListeners(){
 
 
 const products = [
-    {id: 1, name: 'Glow Cleanser', price:30000, type: "cleanser", concern: "acne", image: "images/sc1.jpeg",featured: false},
-    {id: 2, name: 'Hydra Serum', price:10500, type: "serum", concern: "dryness", image: "images/sc2.jpeg",featured: false},
-    {id: 3, name: 'Daily Moisturizer', price:10000, type: "serum", concern: "dryness" , image: "images/sc3.jpeg",featured: false},
-    {id: 4, name: 'Fepair Cream', price:200000, type: "cleanser", concern: "dryness", image: "images/sc4.jpeg",featured: false},
-    {id: 5, name: 'Brightening Essence', price:5000, type: "serum", concern: "acne", image: "images/sc5.jpeg",featured: false},
-    {id: 6, name: 'Toner', price:80000, type: "cleanser", concern: "acne", image: "images/sc6.jpeg",featured: false},
-    {id: 7, name: 'Barrier Boost Serum', price:1000000, type: "serum", concern: "acne", image: "images/sc7.jpeg", featured: true},
-    {id: 8, name: 'Vitamin C ', price:8500, type: "cleanser", concern: "acne", image: "images/sc8.jpeg",featured: false},
-    {id: 9, name: 'Exfoliating Gel', price:700000, type: "cleanser", concern: "dryness", image: "images/sc9.jpeg", featured: true},
-    {id: 10, name: 'Oil Control Lotion', price:8500, type: "serum", concern: "dryness", image: "images/sc10.jpeg", featured: true},
-    {id: 11, name: 'Hydrating Face Mist', price:300000, type: "cleanser", concern: "acne", image: "images/sc11.jpeg",featured: false},
-    {id: 12, name: 'Renewal Night Cream', price:40000, type: "cleanser", concern: "dryness", image: "images/sc12.jpeg",featured: false},
-    {id: 13, name: 'Pore Mask', price:16000, type: "serum", concern: "acne", image: "images/sc13.jpeg",featured: false},
-    {id: 14, name: 'Skin Cleanser', price:30000, type: "serum", concern: "acne", image: "images/sc14.jpeg",featured: false},
-    {id: 15, name: 'Retinol Serum', price:57000, type: "cleanser", concern: "dryness", image: "images/sc15.jpeg",featured: false},
-    {id: 16, name: 'Glow Eye Cream', price:8500, type: "cleanser", concern: "acne", image: "images/sc16.jpeg", featured: true},
-    {id: 17, name: 'SPF Defense', price:36000, type: "serum", concern: "acne", image: "images/sc17.jpeg",featured: false},
-    {id: 18, name: 'Sunscreen', price:8500, type: "cleanser", concern: "acne", image: "images/sc18.jpeg",featured: false},
-    {id: 19, name: 'Clay Mask', price:2300, type: "serum", concern: "acne", image: "images/sc19.jpeg",featured: false},
-    {id: 20, name: 'Face Oil', price:200000, type: "cleanser", concern: "acne", image: "images/sc20.jpeg", featured: true},
+    {id: 1, name: 'Glow Cleanser', price:30000, type: "cleanser", concern: "acne", image: "images/sc1.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 2, name: 'Hydra Serum', price:10500, type: "serum", concern: "dryness", image: "images/sc2.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 3, name: 'Daily Moisturizer', price:10000, type: "serum", concern: "dryness" , image: "images/sc3.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 4, name: 'Fepair Cream', price:200000, type: "cleanser", concern: "dryness", image: "images/sc4.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 5, name: 'Brightening Essence', price:5000, type: "serum", concern: "acne", image: "images/sc5.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 6, name: 'Toner', price:80000, type: "cleanser", concern: "acne", image: "images/sc6.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 7, name: 'Barrier Boost Serum', price:1000000, type: "serum", concern: "acne", image: "images/sc7.jpeg", featured: true, description: "Anti-aging agent"},
+    {id: 8, name: 'Vitamin C ', price:8500, type: "cleanser", concern: "acne", image: "images/sc8.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 9, name: 'Exfoliating Gel', price:700000, type: "cleanser", concern: "dryness", image: "images/sc9.jpeg", featured: true, description: "Anti-aging agent"},
+    {id: 10, name: 'Oil Control Lotion', price:8500, type: "serum", concern: "dryness", image: "images/sc10.jpeg", featured: true, description: "Anti-aging agent"},
+    {id: 11, name: 'Hydrating Face Mist', price:300000, type: "cleanser", concern: "acne", image: "images/sc11.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 12, name: 'Renewal Night Cream', price:40000, type: "cleanser", concern: "dryness", image: "images/sc12.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 13, name: 'Pore Mask', price:16000, type: "serum", concern: "acne", image: "images/sc13.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 14, name: 'Skin Cleanser', price:30000, type: "serum", concern: "acne", image: "images/sc14.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 15, name: 'Retinol Serum', price:57000, type: "cleanser", concern: "dryness", image: "images/sc15.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 16, name: 'Glow Eye Cream', price:8500, type: "cleanser", concern: "acne", image: "images/sc16.jpeg", featured: true, description: "Anti-aging agent"},
+    {id: 17, name: 'SPF Defense', price:36000, type: "serum", concern: "acne", image: "images/sc17.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 18, name: 'Sunscreen', price:8500, type: "cleanser", concern: "acne", image: "images/sc18.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 19, name: 'Clay Mask', price:2300, type: "serum", concern: "acne", image: "images/sc19.jpeg",featured: false, description: "Anti-aging agent"},
+    {id: 20, name: 'Face Oil', price:200000, type: "cleanser", concern: "acne", image: "images/sc20.jpeg", featured: true, description: "Anti-aging agent"},
     
 ]
 
@@ -166,7 +213,11 @@ function renderProducts(filtered){
         card.innerHTML = `<img src="${product.image}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>₦${product.price.toLocaleString()}</p>
-        <button class="add-to-cart-btn">Add to cart <i class="fa-solid fa-cart-shopping" aria-hidden="true"></button>
+        <p>${product.description.toLocaleString()}</p>
+        <button class="add-to-cart-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Add to cart</span>
+        </button>
         `;
 
         if (!product.featured) {
@@ -204,7 +255,17 @@ function filterProducts(){
     renderProducts(filtered);
 }
 
+clearFiltersBtn.addEventListener("click", () => {
+  filters.concern = "all";
+  filters.type = "all";
+  filters.price = "all";
 
+  document.getElementById("filterConcern").value = "all";
+  document.getElementById("filterType").value = "all";
+  document.getElementById("filterPrice").value = "all";
+
+  filterProducts();
+});
 
 
 function renderHomepageFeatured() {
@@ -223,6 +284,7 @@ function renderHomepageFeatured() {
       <span class="badge">Featured</span>
       <img src="${product.image}" alt="${product.name}">
       <h3>${product.name}</h3>
+      <p>${product.description.toLocaleString()}</p>
       <p>₦${product.price.toLocaleString()}</p>
       <button class="add-to-cart-btn">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
     `;
@@ -263,7 +325,10 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProducts(products);
 });
 
-
+document.addEventListener("DOMContentLoaded", () => {
+    renderCart();
+    updateCartCount();
+})
 
 
 

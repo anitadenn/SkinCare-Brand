@@ -24,7 +24,10 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <button><i class="fa-solid fa-cart-shopping" aria-hidden="true" id="cartBtn"></i></button>
+        <button id="cartBtn">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true" ></i>
+            <span id="cart-count">0</span>
+        </button>
     </header>
 
     
@@ -70,6 +73,8 @@
                 <option value="mid">Above 30k</option>
                 <option value="high">Above 100k</option>
             </select>
+
+            <button id="clearFilters" class="clear-filters-btn">Clear Filters</button>
         </div>
     </section>
 
