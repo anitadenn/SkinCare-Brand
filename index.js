@@ -6,7 +6,29 @@ const cartBtn = document.getElementById("cartBtn");
 const cartPanel = document.getElementById("cart-panel");
 const cartOverlay = document.getElementById("cart-overlay");
 const closeCart = document.getElementById("close-cart");
-const clearFiltersBtn = document.getElementById("clearFilters");
+
+const menuBtn = document.getElementById("menuBtn");
+const mobileNav = document.querySelector("header nav");
+
+
+menuBtn.addEventListener("click", () => {
+  menuBtn.classList.toggle("mobile-active");
+  mobileNav.classList.toggle("mobile-open");
+
+  document.body.style.overflow =
+    mobileNav.classList.contains("mobile-open") ? "hidden" : "";
+});
+
+document.querySelectorAll("header nav a").forEach(link => {
+  link.addEventListener("click", closeMenu);
+});
+
+function closeMenu() {
+  menuBtn.classList.remove("mobile-active");
+  nav.classList.remove("mobile-open");
+  document.body.style.overflow = "";
+}
+
 
 
 
@@ -85,7 +107,7 @@ function updateCartCount() {
     cartCount.style.display = "none";
   }
 
-  document.getElementById("cart-count").textContent = count;
+//   document.getElementById("cart-count").textContent = count;
 }
 
 
@@ -107,8 +129,14 @@ function renderCart(){
         const row = document.createElement("div");
         row.className = "cart-item";
 
-        row.innerHTML = `<img src="${item.image}" alt="${item.name}">
+        row.innerHTML = `
+        
         <div class="cart-info">
+          <div>
+            <img src="${item.image}" alt="${item.name}">
+          </div>
+
+          <div>
             <p>${item.name}</p>
             <p>₦${item.price.toLocaleString()}</p>
             <div class="qty-controls">
@@ -116,10 +144,12 @@ function renderCart(){
                 <span>${item.qty}</span>
                 <button class="plus" data-id="${item.id}">+</button>
             </div>
+          </div>
+
         </div>
         
         <button class="remove-item" data-id="${item.id}" aria-label="Remove item">
-            <i class="fa-solid fa-xmark"></i>
+            <i class="fa-solid fa-trash-can"></i>
         </button>
         `;
         cartItems.appendChild(row);
@@ -200,29 +230,24 @@ function renderProducts(filtered){
         const card = document.createElement("div");
         // card.className = "product-card";
         card.classList.add("product-card");
-
-        if (product.featured) {
-            card.classList.add("featured");
-            const badge = document.createElement("span");
-            badge.className = "badge";
-            badge.textContent = "Featured";
-            card.appendChild(badge);
+        if(product.featured){
+            card.classList.add("featured")
         }
 
+        
 
-        card.innerHTML = `<img src="${product.image}" alt="${product.name}">
+        card.innerHTML = `
+        ${product.featured ? `<span class="badge"><i class="fa-solid fa-star"></i> Featured</span>` : ""}
+        <img src="${product.image}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>₦${product.price.toLocaleString()}</p>
-        <p>${product.description.toLocaleString()}</p>
+        <p>${product.description}</p>
         <button class="add-to-cart-btn">
             <i class="fa-solid fa-cart-shopping"></i>
             <span>Add to cart</span>
         </button>
         `;
 
-        if (!product.featured) {
-            card.classList.remove("featured");
-        }
 
         card.querySelector(".add-to-cart-btn").addEventListener("click", () => {
             addToCart(product)});
@@ -255,42 +280,53 @@ function filterProducts(){
     renderProducts(filtered);
 }
 
-clearFiltersBtn.addEventListener("click", () => {
-  filters.concern = "all";
-  filters.type = "all";
-  filters.price = "all";
+const clearFiltersBtn = document.getElementById("clearFilters");
 
-  document.getElementById("filterConcern").value = "all";
-  document.getElementById("filterType").value = "all";
-  document.getElementById("filterPrice").value = "all";
+if (clearFiltersBtn) {
+  clearFiltersBtn.addEventListener("click", () => {
+    filters.concern = "all";
+    filters.type = "all";
+    filters.price = "all";
 
-  filterProducts();
-});
+    document.getElementById("filterConcern").value = "all";
+    document.getElementById("filterType").value = "all";
+    document.getElementById("filterPrice").value = "all";
+
+    filterProducts();
+  });
+}
 
 
 function renderHomepageFeatured() {
   const container = document.getElementById("featuredProductsGrid");
   if (!container) return;
 
+  container.innerHTML = "";
+
   const featuredIds = [7, 9, 10];
 
-  const featuredProducts = featuredIds.map(id => products.find(p => p.id === id));
+  const featuredProducts = featuredIds
+    .map(id => products.find(p => p.id === id))
+    .filter(Boolean);
 
   featuredProducts.forEach(product => {
     const card = document.createElement("div");
     card.classList.add("product-card", "featured");
 
     card.innerHTML = `
-      <span class="badge">Featured</span>
+      <span class="badge"><i class="fa-solid fa-star"></i> Featured</span>
       <img src="${product.image}" alt="${product.name}">
       <h3>${product.name}</h3>
-      <p>${product.description.toLocaleString()}</p>
+      ${product.description ? `<p>${product.description}</p>` : ""}
       <p>₦${product.price.toLocaleString()}</p>
-      <button class="add-to-cart-btn">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
+      <button class="add-to-cart-btn">
+        Add to cart <i class="fa-solid fa-cart-shopping"></i>
+      </button>
     `;
 
-    card.querySelector(".add-to-cart-btn")
-        .addEventListener("click", () => addToCart(product));
+    card
+      .querySelector(".add-to-cart-btn")
+      .addEventListener("click", () => addToCart(product));
 
     container.appendChild(card);
   });
@@ -298,39 +334,76 @@ function renderHomepageFeatured() {
 
 
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
-  renderHomepageFeatured();
-});
 
+  /* ===== HOMEPAGE ===== */
+  if (document.getElementById("featuredProductsGrid")) {
+    renderHomepageFeatured();
+  }
 
+  /* ===== PRODUCTS PAGE ===== */
+  const filterConcern = document.getElementById("filterConcern");
+  const filterType = document.getElementById("filterType");
+  const filterPrice = document.getElementById("filterPrice");
 
-document.getElementById("filterConcern").addEventListener("change", e => {
-    filters.concern = e.target.value;
-    filterProducts();
-});
-document.getElementById("filterType").addEventListener("change", e => {
-    filters.type = e.target.value;
-    filterProducts();
-});
-document.getElementById("filterPrice").addEventListener("change", e => {
-    filters.price = e.target.value;
-    filterProducts();
-});
+  if (filterConcern && filterType && filterPrice) {
+    filterConcern.addEventListener("change", e => {
+      filters.concern = e.target.value;
+      filterProducts();
+    });
 
+    filterType.addEventListener("change", e => {
+      filters.type = e.target.value;
+      filterProducts();
+    });
 
-// https://github.com/anitadenn/SkinCare-Brand.git
+    filterPrice.addEventListener("change", e => {
+      filters.price = e.target.value;
+      filterProducts();
+    });
 
-
-document.addEventListener("DOMContentLoaded", () => {
+    // Initial render for products page
     renderProducts(products);
+  }
+
+  /* ===== CART (ALL PAGES) ===== */
+  renderCart();
+  updateCartCount();
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    renderCart();
-    updateCartCount();
-})
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   renderHomepageFeatured();
+// });
+
+
+
+// document.getElementById("filterConcern").addEventListener("change", e => {
+//     filters.concern = e.target.value;
+//     filterProducts();
+// });
+// document.getElementById("filterType").addEventListener("change", e => {
+//     filters.type = e.target.value;
+//     filterProducts();
+// });
+// document.getElementById("filterPrice").addEventListener("change", e => {
+//     filters.price = e.target.value;
+//     filterProducts();
+// });
+
+
+// // https://github.com/anitadenn/SkinCare-Brand.git
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     renderProducts(products);
+// });
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     renderCart();
+//     updateCartCount();
+// })
 
 
 
