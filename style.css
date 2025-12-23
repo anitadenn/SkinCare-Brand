@@ -1081,6 +1081,15 @@ footer ul li a{
     font-size: 1rem;
    }
 
+   /* contact.html */
+   .row{
+    flex-direction: column;
+   }
+
+   .contact-form{
+    width: 80%;
+   }
+
 
     .footer{
         flex-direction: column;
