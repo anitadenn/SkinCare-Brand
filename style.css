@@ -629,8 +629,13 @@ footer ul li a{
 }
 
 
-
+.newletter-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .newletter-form form{
+    width: 80%;
     max-width: 400px;
     border-radius: 16px;
     display: flex;
@@ -1094,6 +1099,16 @@ footer ul li a{
     .footer{
         flex-direction: column;
         gap: 5rem;
+    }
+    .newsletter-form form{
+        min-width: 80%;
+    }
+    .newletter-form{
+        text-align: center;
+        width: 100%;
+    }
+    .newletter-form input{
+        min-width: 80%;
     }
 }
 
