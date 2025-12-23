@@ -239,9 +239,9 @@ function renderProducts(filtered){
         card.innerHTML = `
         ${product.featured ? `<span class="badge"><i class="fa-solid fa-star"></i> Featured</span>` : ""}
         <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>₦${product.price.toLocaleString()}</p>
-        <p>${product.description}</p>
+        <h3 class="product-name">${product.name}</h3>
+        <p class="product-price">₦${product.price.toLocaleString()}</p>
+        <p class="product-desc">${product.description}</p>
         <button class="add-to-cart-btn">
             <i class="fa-solid fa-cart-shopping"></i>
             <span>Add to cart</span>

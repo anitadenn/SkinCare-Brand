@@ -24,7 +24,7 @@ body{
     color: var(--text-dark);
     background: var(--bg);
     line-height: 1.6;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Inter", sans-serif;
     overflow-x: hidden;
 }
 
@@ -285,6 +285,7 @@ header i{
 }
 
 .hero h1{
+    font-family: "Playfair", serif;
     font-size: clamp(2.8rem, 5vw, 3.6rem);
     line-height: 1.15;
     max-width: 500px;
@@ -414,15 +415,23 @@ header i{
     border-radius: 16px;
 }
 
+
+.product-price{
+    font-family: "Fraunces", sans-serif;
+}
+
+
 .add-to-cart-btn{
     padding: 0.5rem 1.5rem;
     border: none;
+    width: 100%;
     background-color: #3278c7;
     color: white;
     border-radius: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
@@ -1042,6 +1051,9 @@ footer ul li a{
         width: 100%;
         max-width: 100%;
         padding: 0.75rem;
+    }
+    .add-to-cart-btn{
+        padding: 10px 15px;
     }
 
     .product-card img {
