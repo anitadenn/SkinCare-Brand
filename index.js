@@ -14,6 +14,7 @@ const mobileNav = document.querySelector("header nav");
 menuBtn.addEventListener("click", () => {
   menuBtn.classList.toggle("mobile-active");
   mobileNav.classList.toggle("mobile-open");
+  
 
   document.body.style.overflow =
     mobileNav.classList.contains("mobile-open") ? "hidden" : "";
